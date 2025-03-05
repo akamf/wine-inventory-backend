@@ -1,0 +1,49 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE-filer (IntelliJ, VS Code, Eclipse)
+.idea/
+*.iml
+*.ipr
+*.iws
+*.class
+.vscode/
+.project
+.classpath
+.settings/
+
+# Loggar
+logs/
+*.log
+
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+docker-compose.yml
+*.dockerfile
+.env
+
+# Spring Boot
+*.war
+*.jar
+*.pid
+
+# Lombok (genererade filer)
+*.lombok
+
+HELP.md
+
+# Lokala miljöinställningar
+application.yml
+application.properties
