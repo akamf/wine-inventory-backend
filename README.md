@@ -1,7 +1,7 @@
 # Wine Inventory Backend
 
 This is the backend service for the Wine Inventory application, built with:
-- **Java 17**
+- **Java 21**
 - **Spring Boot**
 - **Spring WebFlux** (Reactive programming)
 - **MongoDB** (NoSQL database)
@@ -9,7 +9,7 @@ This is the backend service for the Wine Inventory application, built with:
 - **Docker** (Containerization)
 
 ## 🚀 Prerequisites
-- Install **Java 17**
+- Install **Java 21**
 - Install **Maven**
 - Install **Docker** (for running MongoDB)
 
