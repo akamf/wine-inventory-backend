@@ -2,17 +2,16 @@ package akamf.wine_inventory.service;
 
 import akamf.wine_inventory.model.Wine;
 import akamf.wine_inventory.repository.WineRepository;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
+@RequiredArgsConstructor
 public class WineService {
     private final WineRepository wineRepository;
-
-    public WineService(WineRepository wineRepository) {
-        this.wineRepository = wineRepository;
-    }
 
     public Flux<Wine> getAllWines() { return wineRepository.findAll(); }
 
