@@ -11,7 +11,11 @@ import reactor.core.publisher.Mono;
 public class UserService {
     private final UserRepository userRepository;
 
-    public Mono<User> createUser(User user) { return userRepository.save(user); }
+    public Mono<User> createUser(User user) {
+        return userRepository.save(user);
+    }
 
-    public Mono<User> getUserByUsername(String username) { return userRepository.findByUsername(username); }
+    public Mono<User> getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }
