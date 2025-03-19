@@ -2,19 +2,17 @@ package akamf.wine_inventory.controller;
 
 import akamf.wine_inventory.model.Wine;
 import akamf.wine_inventory.service.WineService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping
+@RequestMapping("/wines")
+@RequiredArgsConstructor
 public class WineController {
     private final WineService wineService;
-
-    public WineController(WineService wineService) {
-        this.wineService = wineService;
-    }
 
     @GetMapping
     public Flux<Wine> getAllWines() { return wineService.getAllWines(); }
