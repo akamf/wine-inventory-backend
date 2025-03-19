@@ -7,5 +7,6 @@ public record WineEntry(
         @Id String id,
         Wine wine,
         LocalDateTime dateAcquired,
-        LocalDateTime dateRemoved
+        LocalDateTime dateRemoved,
+        int amount
 ) { }

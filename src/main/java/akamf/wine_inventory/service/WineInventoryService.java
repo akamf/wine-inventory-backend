@@ -27,8 +27,14 @@ public class WineInventoryService {
         return wineInventoryRepository.findByUserId(userId)
             .flatMap(inventory -> {
                 String wineId = wine.id();
-                WineEntry newEntry = new WineEntry(wineId, wine, LocalDateTime.now(), null);
-                inventory.currentWines().put(wineId, newEntry);
+                inventory.currentWines().compute(wineId, (key, entry) -> {
+                    if (entry == null) {
+                        return new WineEntry(wineId, wine, LocalDateTime.now(), null, 1);
+                    } else {
+                        return new WineEntry(
+                            entry.id(), entry.wine(), entry.dateAcquired(), null, entry.amount() + 1);
+                    }
+                });
                 return wineInventoryRepository.save(inventory);
             });
     }
@@ -37,11 +43,18 @@ public class WineInventoryService {
         return wineInventoryRepository.findByUserId(userId)
             .flatMap(inventory -> {
                 if (inventory.currentWines().containsKey(wineId)) {
-                    WineEntry entry = inventory.currentWines().remove(wineId);
-                    WineEntry historyEntry = new WineEntry(
-                            entry.id(), entry.wine(), entry.dateAcquired(), LocalDateTime.now()
-                    );
-                    inventory.wineHistory().put(wineId, historyEntry);
+                    WineEntry entry = inventory.currentWines().get(wineId);
+                    if (entry.amount() > 1) {
+                        inventory.currentWines().put(wineId, new WineEntry(
+                                entry.id(), entry.wine(), entry.dateAcquired(), null, entry.amount() - 1
+                        ));
+                    } else {
+                        inventory.currentWines().remove(wineId);
+                        WineEntry historyEntry = new WineEntry(
+                                entry.id(), entry.wine(), entry.dateAcquired(), LocalDateTime.now(), 1
+                        );
+                        inventory.wineHistory().put(wineId, historyEntry);
+                    }
                 }
                 return wineInventoryRepository.save(inventory);
             });
