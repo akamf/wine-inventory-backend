@@ -1,5 +1,6 @@
 package akamf.wine_inventory.controller;
 
+import akamf.wine_inventory.model.Wine;
 import akamf.wine_inventory.model.WineInventory;
 import akamf.wine_inventory.service.WineInventoryService;
 
@@ -21,5 +22,15 @@ public class WineInventoryController {
     @PostMapping
     public Mono<WineInventory> createInventory(@RequestBody WineInventory inventory) {
         return wineInventoryService.createInventory(inventory);
+    }
+
+    @PostMapping("/{userId}/add-wine")
+    public Mono<WineInventory> addWine(@PathVariable String userId, @RequestBody Wine wine) {
+        return wineInventoryService.addWineToInventory(userId, wine);
+    }
+
+    @DeleteMapping("/{userId}/remove-wine/{wineId}")
+    public Mono<WineInventory> removeWine(@PathVariable String userId, @PathVariable String wineId) {
+        return wineInventoryService.removeWineFromInventory(userId, wineId);
     }
 }
