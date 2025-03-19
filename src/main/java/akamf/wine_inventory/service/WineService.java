@@ -21,14 +21,15 @@ public class WineService {
 
     public Mono<Wine> updateWine(String id, Wine wine) {
         return wineRepository.findById(id)
-                .flatMap(wineToUpdate -> {
-                    wineToUpdate.setName(wine.getName());
-                    wineToUpdate.setCountry(wine.getCountry());
-                    wineToUpdate.setType(wine.getType());
-                    wineToUpdate.setYear(wine.getYear());
-                    wineToUpdate.setPrice(wine.getPrice());
-                    return wineRepository.save(wineToUpdate);
-                });
+            .map(existingWine -> new Wine(
+                    existingWine.id(),
+                    wine.name(),
+                    wine.country(),
+                    wine.type(),
+                    wine.year(),
+                    wine.price()
+            ))
+            .flatMap(wineRepository::save);
     }
 
     public Mono<Void> deleteWine(String id) { return wineRepository.deleteById(id); }
