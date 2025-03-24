@@ -1,0 +1,53 @@
+type Query {
+    getUser(id: String!): User
+    getAllUsers: [User]
+    getWine(id: String!): Wine
+    getAllWines: [Wine]
+    getWineInventory(userID: String!): WineInventory
+}
+
+type Mutation {
+    createUser(username: String!, password: String!, email: String!): User
+    addWineToInventory(userId: String!, wine: WineInput!): WineInventory
+    removeWineFromInventory(userId: String!, wineId: String!): WineInventory
+}
+
+type User {
+    id: ID!
+    username: String!
+    password: String!
+    email: String!
+    createdAt: String
+    inventoryId: String
+}
+
+type Wine {
+    id: ID!
+    name: String!
+    type: String!
+    country: String!
+    year: Int
+    price: Float
+}
+
+type WineEntry {
+    id: ID!
+    wine: Wine
+    dateAcquired: String
+    dateRemoved: String
+    amount: Int
+}
+
+type WineInventory {
+    id: ID!
+    currentWines: [WineEntry]
+    wineHistory : [WineEntry]
+}
+
+input WineInput {
+    name: String!
+    type: String!
+    country: String
+    year: Int
+    price: Float
+}
