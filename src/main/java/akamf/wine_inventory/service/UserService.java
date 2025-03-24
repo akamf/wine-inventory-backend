@@ -7,6 +7,7 @@ import akamf.wine_inventory.repository.UserRepository;
 import akamf.wine_inventory.repository.WineInventoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
@@ -39,5 +40,9 @@ public class UserService {
 
     public Mono<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public Flux<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

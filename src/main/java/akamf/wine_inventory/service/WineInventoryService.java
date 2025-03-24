@@ -28,13 +28,13 @@ public class WineInventoryService {
             .flatMap(inventory -> {
                 String wineId = wine.id();
                 inventory.currentWines().compute(wineId, (key, entry) -> {
-                    if (entry == null) {
+
+                    if (entry == null)
                         return new WineEntry(wineId, wine, LocalDateTime.now(), null, 1);
-                    } else {
-                        return new WineEntry(
-                            entry.id(), entry.wine(), entry.dateAcquired(), null, entry.amount() + 1);
-                    }
+                    else
+                        return new WineEntry(entry.id(), entry.wine(), entry.dateAcquired(), null, entry.amount() + 1);
                 });
+
                 return wineInventoryRepository.save(inventory);
             });
     }
