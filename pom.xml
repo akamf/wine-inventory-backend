@@ -105,6 +105,13 @@
 			<version>11.1.0</version>
 		</dependency>
 
+		<!-- DGS (Netflix GraphQL) -->
+		<dependency>
+			<groupId>com.netflix.graphql.dgs</groupId>
+			<artifactId>graphql-dgs-spring-boot-starter</artifactId>
+			<version>6.0.0</version>
+		</dependency>
+
 		<!-- Jackson for JSON Processing -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
