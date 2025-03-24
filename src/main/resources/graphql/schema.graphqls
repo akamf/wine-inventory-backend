@@ -2,7 +2,7 @@ type Query {
     getUser(id: String!): User
     getAllUsers: [User]
 
-    getWineInventory(userID: String!): WineInventory
+    getInventoryByUserId(userID: String!): WineInventory
 
     getWineById(id: ID!): Wine
     getAllWines: [Wine]
