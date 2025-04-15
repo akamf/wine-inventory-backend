@@ -1,5 +1,6 @@
 package akamf.wine_inventory.service;
 
+import akamf.wine_inventory.dto.UserInputDto;
 import akamf.wine_inventory.model.User;
 import akamf.wine_inventory.model.WineInventory;
 import akamf.wine_inventory.repository.UserRepository;
@@ -20,8 +21,19 @@ public class UserService {
     private final UserRepository userRepository;
     private final WineInventoryRepository wineInventoryRepository;
 
-    public Mono<User> createUser(User user) {
+    public Mono<User> createUser(UserInputDto userDto) {
         String inventoryId = UUID.randomUUID().toString();
+
+        User user = new User(
+                UUID.randomUUID().toString(),
+                userDto.username(),
+                userDto.password(),
+                userDto.email(),
+                LocalDateTime.now(),
+                null,
+                inventoryId
+        );
+
         WineInventory inventory = new WineInventory(
                 inventoryId, user.id(), new HashMap<>(), new HashMap<>()
         );
