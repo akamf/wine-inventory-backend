@@ -3,21 +3,6 @@
 This is the backend service for the Wine Inventory application, built with:
 - **Java 21**
 - **Spring Boot**
-- **Spring WebFlux** (Reactive programming)
-- **MongoDB** (NoSQL database)
-- **GraphQL** (Flexible data queries)
-- **Docker** (Containerization)
-
-## 🚀 Prerequisites
-- Install **Java 21**
-- Install **Maven**
-- Install **Docker** (for running MongoDB)
-
-## 🛠 Technologies Used
-- **Spring WebFlux** for asynchronous, non-blocking request handling.
-- **MongoDB** as the database.
-- **GraphQL** for flexible API queries.
-- **Docker** for containerized development.
 
 ## 📝 License
 This project is licensed under the MIT License.
