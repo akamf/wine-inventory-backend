@@ -9,13 +9,13 @@ type Query {
 }
 
 type Mutation {
-    createUser(user: UserInput!): User
+    createUser(userInput: UserInputDto!): User
 
-    addWineToInventory(userId: String!, wine: WineInput!): WineInventory
+    addWineToInventory(userId: String!, wineInput: WineInputDto!): WineInventory
     removeWineFromInventory(userId: String!, wineId: String!): WineInventory
 
-    createWine(wine: WineInput!): Wine
-    updateWine(id: ID!, wine: WineInput!): Wine
+    createWine(wineInput: WineInputDto!): Wine
+    updateWine(id: ID!, wineInput: WineInputDto!): Wine
     deleteWine(id: ID!): Boolean
 }
 
@@ -28,7 +28,7 @@ type User {
     inventoryId: String
 }
 
-input UserInput {
+input UserInputDto {
     username: String!
     password: String!
     email: String!
@@ -57,7 +57,7 @@ type WineInventory {
     wineHistory: [WineEntry!]!
 }
 
-input WineInput {
+input WineInputDto {
     name: String!
     type: String!
     country: String
