@@ -1,21 +1,21 @@
 type Query {
-    getUser(id: String!): User
+    getUser(username: String!): User
     getAllUsers: [User]
 
-    getInventoryByUserId(userID: String!): WineInventory
+    getInventoryByUserId(userId: String!): WineInventory
 
     getWineById(id: ID!): Wine
     getAllWines: [Wine]
 }
 
 type Mutation {
-    createUser(username: String!, password: String!, email: String!): User
+    createUser(user: UserInput!): User
 
     addWineToInventory(userId: String!, wine: WineInput!): WineInventory
     removeWineFromInventory(userId: String!, wineId: String!): WineInventory
 
-    createWine(id: ID!, name: String!, type: String!, country: String!, year: Int, price: Float): Wine
-    updateWine(id: ID!, name: String!, type: String!, country: String!, year: Int, price: Float): Wine
+    createWine(wine: WineInput!): Wine
+    updateWine(id: ID!, wine: WineInput!): Wine
     deleteWine(id: ID!): Boolean
 }
 
@@ -26,6 +26,12 @@ type User {
     email: String!
     createdAt: String
     inventoryId: String
+}
+
+input UserInput {
+    username: String!
+    password: String!
+    email: String!
 }
 
 type Wine {
@@ -47,8 +53,8 @@ type WineEntry {
 
 type WineInventory {
     id: ID!
-    currentWines: [WineEntry]
-    wineHistory : [WineEntry]
+    currentWines: [WineEntry!]!
+    wineHistory: [WineEntry!]!
 }
 
 input WineInput {
