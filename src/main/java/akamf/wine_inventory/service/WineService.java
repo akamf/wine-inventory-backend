@@ -16,9 +16,13 @@ import java.util.UUID;
 public class WineService {
     private final WineRepository wineRepository;
 
-    public Flux<Wine> getAllWines() { return wineRepository.findAll(); }
+    public Flux<Wine> getAllWines() {
+        return wineRepository.findAll();
+    }
 
-    public Mono<Wine> getWineById(String id) { return wineRepository.findById(id); }
+    public Mono<Wine> getWineById(String id) {
+        return wineRepository.findById(id);
+    }
 
     public Mono<Wine> createWine(WineInputDto wineInput) {
         Wine wine = new Wine(
@@ -45,5 +49,7 @@ public class WineService {
                 .flatMap(wineRepository::save);
     }
 
-    public Mono<Void> deleteWine(String id) { return wineRepository.deleteById(id); }
+    public Mono<Void> deleteWine(String id) {
+        return wineRepository.deleteById(id);
+    }
 }
