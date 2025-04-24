@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -23,37 +24,56 @@ public class WineInventoryService {
         return wineInventoryRepository.save(inventory);
     }
 
-    public Mono<WineInventory> addWineToInventory(String userId, Wine wine) {
+    public Mono<WineInventory> addWineToInventory(String userId, String wineId) {
         return wineInventoryRepository.findByUserId(userId)
             .flatMap(inventory -> {
-                String wineId = wine.id();
                 inventory.currentWines().compute(wineId, (key, entry) -> {
 
                     if (entry == null)
-                        return new WineEntry(wineId, wine, LocalDateTime.now(), null, 1);
+                        return new WineEntry(
+                                UUID.randomUUID().toString(),
+                                wineId,
+                                LocalDateTime.now(),
+                                null,
+                                1
+                        );
                     else
-                        return new WineEntry(entry.id(), entry.wine(), entry.dateAcquired(), null, entry.amount() + 1);
+                        return new WineEntry(
+                                entry.id(),
+                                entry.wineId(),
+                                entry.dateAcquired(),
+                                null,
+                                entry.amount() + 1
+                        );
                 });
 
                 return wineInventoryRepository.save(inventory);
             });
     }
 
-    public Mono<WineInventory> removeWineFromInventory(String userId, String wineId) {
+    public Mono<WineInventory> removeWineFromInventory(String userId, String entryId) {
         return wineInventoryRepository.findByUserId(userId)
             .flatMap(inventory -> {
-                if (inventory.currentWines().containsKey(wineId)) {
-                    WineEntry entry = inventory.currentWines().get(wineId);
+                if (inventory.currentWines().containsKey(entryId)) {
+                    WineEntry entry = inventory.currentWines().get(entryId);
                     if (entry.amount() > 1) {
-                        inventory.currentWines().put(wineId, new WineEntry(
-                                entry.id(), entry.wine(), entry.dateAcquired(), null, entry.amount() - 1
+                        inventory.currentWines().put(entryId, new WineEntry(
+                                entryId,
+                                entry.wineId(),
+                                entry.dateAcquired(),
+                                null,
+                                entry.amount() - 1
                         ));
                     } else {
-                        inventory.currentWines().remove(wineId);
+                        inventory.currentWines().remove(entryId);
                         WineEntry historyEntry = new WineEntry(
-                                entry.id(), entry.wine(), entry.dateAcquired(), LocalDateTime.now(), 1
+                                entryId,
+                                entry.wineId(),
+                                entry.dateAcquired(),
+                                LocalDateTime.now(),
+                                1
                         );
-                        inventory.wineHistory().put(wineId, historyEntry);
+                        inventory.wineHistory().put(entryId, historyEntry);
                     }
                 }
                 return wineInventoryRepository.save(inventory);

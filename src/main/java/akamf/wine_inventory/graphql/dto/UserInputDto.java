@@ -1,4 +1,4 @@
-package akamf.wine_inventory.dto;
+package akamf.wine_inventory.graphql.dto;
 
 public record UserInputDto(
     String username,

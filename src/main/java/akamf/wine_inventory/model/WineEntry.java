@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public record WineEntry(
         @Id String id,
-        Wine wine,
+        String wineId,
         LocalDateTime dateAcquired,
         LocalDateTime dateRemoved,
         int amount

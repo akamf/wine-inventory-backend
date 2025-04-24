@@ -1,6 +1,6 @@
 package akamf.wine_inventory.service;
 
-import akamf.wine_inventory.dto.UserInputDto;
+import akamf.wine_inventory.graphql.dto.UserInputDto;
 import akamf.wine_inventory.model.User;
 import akamf.wine_inventory.model.WineInventory;
 import akamf.wine_inventory.repository.UserRepository;
