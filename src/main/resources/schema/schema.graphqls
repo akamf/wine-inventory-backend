@@ -11,7 +11,7 @@ type Query {
 type Mutation {
     createUser(userInput: UserInputDto!): User
 
-    addWineToInventory(userId: String!, wineInput: WineInputDto!): WineInventory
+    addWineToInventory(userId: String!, wineId: String!): WineInventory
     removeWineFromInventory(userId: String!, wineId: String!): WineInventory
 
     createWine(wineInput: WineInputDto!): Wine
@@ -45,7 +45,7 @@ type Wine {
 
 type WineEntry {
     id: ID!
-    wine: Wine
+    wineId: String!
     dateAcquired: String
     dateRemoved: String
     amount: Int

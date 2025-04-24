@@ -17,8 +17,8 @@ public class WineInventoryMutation {
     private final WineInventoryService wineInventoryService;
 
     @DgsMutation
-    public Mono<WineInventory> addWineToInventory(@InputArgument String userId, @InputArgument Wine wine) {
-        return wineInventoryService.addWineToInventory(userId, wine);
+    public Mono<WineInventory> addWineToInventory(@InputArgument String userId, @InputArgument String wineId) {
+        return wineInventoryService.addWineToInventory(userId, wineId);
     }
 
     @DgsMutation

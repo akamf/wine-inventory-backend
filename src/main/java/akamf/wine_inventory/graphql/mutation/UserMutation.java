@@ -1,6 +1,6 @@
 package akamf.wine_inventory.graphql.mutation;
 
-import akamf.wine_inventory.dto.UserInputDto;
+import akamf.wine_inventory.graphql.dto.UserInputDto;
 import akamf.wine_inventory.model.User;
 import akamf.wine_inventory.service.UserService;
 import com.netflix.graphql.dgs.DgsComponent;
@@ -16,7 +16,7 @@ public class UserMutation {
     private final UserService userService;
 
     @DgsMutation
-    public Mono<User> createUser(@InputArgument("user") UserInputDto userInput) {
+    public Mono<User> createUser(@InputArgument("userInput") UserInputDto userInput) {
         return userService.createUser(userInput);
     }
 }
