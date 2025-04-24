@@ -8,7 +8,7 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
-# IDE-filer (IntelliJ, VS Code, Eclipse)
+# IDE (IntelliJ, VS Code, Eclipse)
 .idea/
 *.iml
 *.ipr
@@ -41,11 +41,8 @@ docker-compose.yaml
 *.jar
 *.pid
 
-# Lombok (genererade filer)
+# Lombok
 *.lombok
 
-HELP.md
-
-# Lokala miljöinställningar
 application.yml
 application.properties
